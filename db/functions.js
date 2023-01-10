@@ -43,10 +43,10 @@ export async function createUserFavouritesTable() {
   );
 }
 
-try {
-  createUserFavouritesTable();
-} catch (error) {
-  console.log(error);
-} finally {
-  await pool.end();
-}
+// try {
+//   createUserFavouritesTable();
+// } catch (error) {
+//   console.log(error);
+// } finally {
+//   await pool.end();
+// }
