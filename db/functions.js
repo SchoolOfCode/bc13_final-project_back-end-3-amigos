@@ -16,9 +16,9 @@ import { user, userFavourites } from "./data.js";
  *  this fn will create the users table
  */
 export async function createUserTable() {
-  await pool.query(
-    "CREATE TABLE users(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, username VARCHAR, email VARCHAR, password VARCHAR)"
-  );
+	await pool.query(
+		"CREATE TABLE users(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, username VARCHAR, email VARCHAR, password VARCHAR)"
+	);
 }
 
 /**
@@ -38,9 +38,9 @@ export async function createUserTable() {
  */
 
 export async function createUserFavouritesTable() {
-  await pool.query(
-    "CREATE TABLE user_favourites(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, user_id INT REFERENCES users(id), title VARCHAR, city VARCHAR, country VARCHAR, suburb VARCHAR, description VARCHAR, image VARCHAR)"
-  );
+	await pool.query(
+		"CREATE TABLE user_favourites(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, user_id INT REFERENCES users(id), title VARCHAR, city VARCHAR, country VARCHAR, suburb VARCHAR, description VARCHAR, image VARCHAR)"
+	);
 }
 
 // try {
@@ -50,3 +50,26 @@ export async function createUserFavouritesTable() {
 // } finally {
 //   await pool.end();
 // }
+
+/* 
+use pool.query to insert/seed data into table 
+async await function 
+apply JSON.stringify() to convert data to JS Object 
+*/
+
+export async function insertDataUsers() {
+	return await pool.query(
+		`INSERT INTO users(username, email, password) (SELECT username, email, password FROM json_populate_recordset(NULL::users, $1::JSON));`,
+		[JSON.stringify(user)]
+	);
+}
+
+/* try {
+	insertDataUsers();
+} catch (error) {
+	console.log(error);
+} finally {
+	await pool.end();
+} */
+
+// A comment
