@@ -3,6 +3,7 @@
  */
 
 import express from "express";
+import { createUserTable } from "./db/functions.js";
 
 /**
  * initialize a new express server
