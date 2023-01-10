@@ -16,9 +16,9 @@ import { user, userFavourites } from "./data.js";
  *  this fn will create the users table
  */
 export async function createUserTable() {
-	await pool.query(
-		"CREATE TABLE users(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, username VARCHAR, email VARCHAR, password VARCHAR)"
-	);
+  await pool.query(
+    "CREATE TABLE users(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, username VARCHAR, email VARCHAR, password VARCHAR)"
+  );
 }
 
 /**
@@ -38,9 +38,9 @@ export async function createUserTable() {
  */
 
 export async function createUserFavouritesTable() {
-	await pool.query(
-		"CREATE TABLE user_favourites(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, user_id INT REFERENCES users(id), title VARCHAR, city VARCHAR, country VARCHAR, suburb VARCHAR, description VARCHAR, image VARCHAR)"
-	);
+  await pool.query(
+    "CREATE TABLE user_favourites(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, user_id INT REFERENCES users(id), title VARCHAR, city VARCHAR, country VARCHAR, suburb VARCHAR, description VARCHAR, image VARCHAR)"
+  );
 }
 
 // try {
@@ -58,10 +58,10 @@ apply JSON.stringify() to convert data to JS Object
 */
 
 export async function insertDataUsers() {
-	return await pool.query(
-		`INSERT INTO users(username, email, password) (SELECT username, email, password FROM json_populate_recordset(NULL::users, $1::JSON));`,
-		[JSON.stringify(user)]
-	);
+  return await pool.query(
+    `INSERT INTO users(username, email, password) (SELECT username, email, password FROM json_populate_recordset(NULL::users, $1::JSON));`,
+    [JSON.stringify(user)]
+  );
 }
 
 /* try {
@@ -74,11 +74,11 @@ export async function insertDataUsers() {
 
 // A comment
 
-export async function insertDataUserFavourites(){
-	return await pool.query(
-		`INSERT INTO user_favourites(user_id, title, city, country, suburb, description, image) (SELECT user_id, title, city, country, suburb, description, image FROM json_populate_recordset(NULL::user_favourites, $1::JSON));`,
-		[JSON.stringify(userFavourites)]
-	);
+export async function insertDataUserFavourites() {
+  return await pool.query(
+    `INSERT INTO user_favourites(user_id, title, city, country, suburb, description, image) (SELECT user_id, title, city, country, suburb, description, image FROM json_populate_recordset(NULL::user_favourites, $1::JSON));`,
+    [JSON.stringify(userFavourites)]
+  );
 }
 
 // try {
