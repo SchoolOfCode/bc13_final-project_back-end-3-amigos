@@ -73,3 +73,18 @@ export async function insertDataUsers() {
 } */
 
 // A comment
+
+export async function insertDataUserFavourites(){
+	return await pool.query(
+		`INSERT INTO user_favourites(user_id, title, city, country, suburb, description, image) (SELECT user_id, title, city, country, suburb, description, image FROM json_populate_recordset(NULL::user_favourites, $1::JSON));`,
+		[JSON.stringify(userFavourites)]
+	);
+}
+
+// try {
+// 	insertDataUserFavourites();
+// } catch (error) {
+// 	console.log(error);
+// } finally {
+// 	await pool.end();
+// }
