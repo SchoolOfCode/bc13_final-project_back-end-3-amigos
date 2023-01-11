@@ -31,10 +31,17 @@ export async function addNewFavourite(favourite){
 }
 
 // POST add new user
-
 export async function addNewUsers (users) {
   const res = await pool.query (
     `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING*;`, [users.username, users.email, users.password]
   );
   return res.rows
+}
+
+//DELETE - location by id
+export async function deleteFavouriteById (id){
+  const res=await pool.query(
+    `DELETE FROM user_favourites WHERE id = $1 RETURNING*;`, [id]
+  );
+  return res
 }
