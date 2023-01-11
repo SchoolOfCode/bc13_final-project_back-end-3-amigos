@@ -88,3 +88,32 @@ export async function insertDataUserFavourites() {
 // } finally {
 // 	await pool.end();
 // }
+
+
+//function to delete user table
+export async function deleteUserTable () {
+  await pool.query ( `DROP TABLE users`
+  )
+}
+
+// try {
+// 	deleteUserTable ();
+// } catch (error) {
+// 	console.log(error);
+// } finally {
+// 	await pool.end();
+// }
+
+// function to delete user_favourites table
+export async function deleteUserFavouritesTable () {
+  await pool.query ( `DROP TABLE user_favourites`
+  )
+}
+
+// try {
+// 	deleteUserFavouritesTable ();
+// } catch (error) {
+// 	console.log(error);
+// } finally {
+// 	await pool.end();
+// }
