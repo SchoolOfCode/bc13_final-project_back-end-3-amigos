@@ -29,13 +29,10 @@ import {pool} from "../db/index";
                 })
             }
         })
-       
-
-       
     })
     
-    afterAll(() => {
-        pool.end();
+    afterAll(async () => {
+        await pool.end();
     });
     
 
