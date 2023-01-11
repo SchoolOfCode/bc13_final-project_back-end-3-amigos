@@ -2,6 +2,7 @@
  * import pool from db folder index.js
  */
 
+import { response } from "express";
 import { pool } from "../db/index.js";
 
 /**
@@ -18,3 +19,13 @@ export async function getFavouritesByUserId(id) {
   );
   return res.rows;
 }
+
+// POST- add new favourite
+export async function addNewFavourite(favourite){
+  const res = await pool.query( 
+    `INSERT INTO user_favourites (user_id, title, city, country, suburb, description, image) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING*;`, [favourite.user_id, favourite.title, favourite.city, favourite.country, favourite.suburb, favourite.description, favourite.image]
+  );
+  return res.rows;
+}
+
+// POST add new user
