@@ -5,7 +5,7 @@
  */
 
 import express from "express";
-import { getFavouritesByUserId, addNewFavourite } from "../models/index.js";
+import { getFavouritesByUserId, addNewFavourite, addNewUsers } from "../models/index.js";
 
 const router = express.Router();
 
@@ -21,11 +21,21 @@ router.get("/:id", async function (req, res) {
 
 // POST: new favourite location 
 router.post("/",async function (req, res){
-const response = await addNewFavourite(req.body);
-res.status(200).json({
+if(req.body.username) {
+  const response = await addNewUsers(req.body);
+  res.status(200).json({
+    success: true,
+    payload: response
+  })
+} else {
+  const response = await addNewFavourite(req.body);
+  res.status(200).json({
   success: true,
   payload: response
 })
+
+}
+
 
 })
 

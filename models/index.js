@@ -9,6 +9,8 @@ import { pool } from "../db/index.js";
  *  an async await fn to get all the favourites by the user id
  */
 
+//Note: after implmenting the AUTH we might need to change the way we are getting the data e.g not to show username, password and email - will come back to this once the auth is implemented
+
 export async function getFavouritesByUserId(id) {
   // use pool.query to open database connection
   const res = await pool.query(
@@ -29,3 +31,10 @@ export async function addNewFavourite(favourite){
 }
 
 // POST add new user
+
+export async function addNewUsers (users) {
+  const res = await pool.query (
+    `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING*;`, [users.username, users.email, users.password]
+  );
+  return res.rows
+}
