@@ -16,7 +16,7 @@ export async function getFavouritesByUserId(id) {
   const res = await pool.query(
     // use the inner join to select favourites places by user's id
     // used the $1 to secure the id
-    `SELECT * FROM user_favourites INNER JOIN users on user_favourites.user_id=users.id WHERE user_id= $1`,
+    `SELECT user_favourites.id, title, city, country, suburb, description, image FROM user_favourites INNER JOIN users on user_favourites.user_id=users.id WHERE user_id= $1`,
     [id]
   );
   return res.rows;
@@ -43,5 +43,5 @@ export async function deleteFavouriteById (id){
   const res=await pool.query(
     `DELETE FROM user_favourites WHERE id = $1 RETURNING*;`, [id]
   );
-  return res
+  return res.rows
 }

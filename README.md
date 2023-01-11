@@ -7,12 +7,9 @@ DONE - CORS - add cors middleware
 Add database drop table function 
 DONE - Add post route
 DONE - Add post model
-Add delete route
-Add delete model
+DONE - Add delete route
+DONE - Add delete model
 
-NB: ensure to switch back the DATABASE URL to our original:
-!
-postgres://xwrxqxhr:wCU0PAsKZeTaKCaGCueQHoyKuJHh0wNn@mel.db.elephantsql.com/xwrxqxhr
 
 
 
