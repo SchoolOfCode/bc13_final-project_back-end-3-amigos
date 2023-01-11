@@ -3,9 +3,9 @@
 PLAN
 DONE -  added 'dev' script for development, and changed the 'start' script to run node instead of nodemon so that it won't constantly be tracking and rereshing with each change
 DONE - Add .env in git ignore
-CORS - add cors middleware
+DONE - CORS - add cors middleware
 Add database drop table function 
-Add post route
-Add post model
+DONE - Add post route
+DONE - Add post model
 Add delete route
 Add delete model
