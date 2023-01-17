@@ -52,7 +52,7 @@ export async function addNewUsers(users) {
 }
 
 //DELETE - location by xid
-// changed this here so that it uses xid instead of id
+// changed this here so that it uses location xid instead of id
 export async function deleteFavouriteById(xid) {
   const res = await pool.query(
     `DELETE FROM user_favourites WHERE xid = $1 RETURNING*;`,

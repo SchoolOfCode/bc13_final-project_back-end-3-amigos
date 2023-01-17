@@ -42,8 +42,9 @@ router.post("/", async function (req, res) {
 });
 
 // DELETE: delete favourite location  by XID
-router.delete("/:id", async function (req, res){
-  const response = await deleteFavouriteById(req.params.id);
+// nb: can i change the '/:id' here to '/:xid'? 
+router.delete("/:xid", async function (req, res){
+  const response = await deleteFavouriteById(req.params.xid);
   res.status(200).json({
     success: true, 
     payload: response
