@@ -23,7 +23,8 @@ router.get("/:id", async function (req, res) {
   });
 });
 
-// POST: new favourite location
+// POST: new favourite location AND
+//POST: new user
 router.post("/", async function (req, res) {
   if (req.body.username) {
     const response = await addNewUsers(req.body);
