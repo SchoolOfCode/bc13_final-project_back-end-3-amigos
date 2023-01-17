@@ -4,7 +4,7 @@ import app from "../App";
 import { pool } from "../db/index";
 
 // Test suite for the home route + ID -> get favourites by id, and delete user favourite by ID
-
+// added 'expect xid' to object
 describe("/:id", () => {
 
 // Get user favourites by ID
@@ -23,6 +23,7 @@ describe("/:id", () => {
     for (let i = 0; i < data.length; i++) {
       expect(data[i]).toEqual({
         id: expect.any(Number),
+        xid: expect.any(String),
         title: expect.any(String),
         city: expect.any(String),
         country: expect.any(String),
@@ -49,6 +50,7 @@ describe("/:id", () => {
       {
         id: expect.any(Number),
         user_id: expect.any(Number),
+        xid: expect.any(String),
         title: expect.any(String),
         city: expect.any(String),
         country: expect.any(String),
