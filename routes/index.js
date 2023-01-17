@@ -40,7 +40,7 @@ router.post("/", async function (req, res) {
   }
 });
 
-// DELETE: delete favourite location  by id
+// DELETE: delete favourite location  by XID
 router.delete("/:id", async function (req, res){
   const response = await deleteFavouriteById(req.params.id);
   res.status(200).json({

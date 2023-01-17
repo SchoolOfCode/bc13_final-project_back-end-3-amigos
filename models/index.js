@@ -10,6 +10,7 @@ import { pool } from "../db/index.js";
  */
 
 //Note: after implmenting the AUTH we might need to change the way we are getting the data e.g not to show username, password and email - will come back to this once the auth is implemented
+// WE NEED TO BE PASSING THROUGH THE XID ETC!
 
 export async function getFavouritesByUserId(id) {
   // use pool.query to open database connection
