@@ -3,7 +3,6 @@
  */
 
 import express from "express";
-import { createUserTable, createUserFavouritesTable } from "./db/functions.js";
 import { router } from "./routes/index.js";
 import cors from "cors"
 
