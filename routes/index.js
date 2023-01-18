@@ -14,9 +14,9 @@ import {
 
 const router = express.Router();
 
-// GET: favourites by user ID
-router.get("/:id", async function (req, res) {
-  const response = await getFavouritesByUserId(req.params.id);
+// GET: favourites by uid
+router.get("/:uid", async function (req, res) {
+  const response = await getFavouritesByUserId(req.params.uid);
   res.status(200).json({
     success: true,
     payload: response,
@@ -24,7 +24,7 @@ router.get("/:id", async function (req, res) {
 });
 
 // POST: new favourite location AND
-//POST: new user
+// POST: new user
 router.post("/", async function (req, res) {
   if (req.body.username) {
     const response = await addNewUsers(req.body);
@@ -41,8 +41,7 @@ router.post("/", async function (req, res) {
   }
 });
 
-// DELETE: delete favourite location  by XID
-// nb: can i change the '/:id' here to '/:xid'?
+// DELETE: by uid and xid, passed through as an object in the body from the front end
 router.delete("/", async function (req, res) {
   const response = await deleteFavouriteById(req.body);
   res.status(200).json({
