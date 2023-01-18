@@ -41,8 +41,7 @@ export async function createUserTable() {
 
 export async function createUserFavouritesTable() {
   await pool.query(
-
-    "CREATE TABLE user_favourites(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, uid VARCHAR REFERENCES users(uid), title VARCHAR, city VARCHAR, country VARCHAR, suburb VARCHAR, description VARCHAR, image VARCHAR)"
+    "CREATE TABLE user_favourites(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, uid VARCHAR REFERENCES users(uid), xid VARCHAR, title VARCHAR, city VARCHAR, country VARCHAR, suburb VARCHAR, description VARCHAR, image VARCHAR)"
   );
 }
 
@@ -81,17 +80,12 @@ export async function insertDataUsers() {
 // 	console.log(error);
 // } finally {
 // 	await pool.end();
-// } 
-
-
-
+// }
 
 export async function insertDataUserFavourites() {
   return await pool.query(
+    `INSERT INTO user_favourites(uid, xid, title, city, country, suburb, description, image) (SELECT uid, xid, title, city, country, suburb, description, image FROM json_populate_recordset(NULL::user_favourites, $1::JSON));`,
 
-    `INSERT INTO user_favourites(uid, title, city, country, suburb, description, image) (SELECT uid, title, city, country, suburb, description, image FROM json_populate_recordset(NULL::user_favourites, $1::JSON));`,
-
-  
     [JSON.stringify(userFavourites)]
   );
 }
