@@ -9,7 +9,7 @@ import {
   getFavouritesByUserId,
   addNewFavourite,
   addNewUsers,
-  deleteFavouriteById
+  deleteFavouriteById,
 } from "../models/index.js";
 
 const router = express.Router();
@@ -42,13 +42,13 @@ router.post("/", async function (req, res) {
 });
 
 // DELETE: delete favourite location  by XID
-// nb: can i change the '/:id' here to '/:xid'? 
-router.delete("/:xid", async function (req, res){
-  const response = await deleteFavouriteById(req.params.xid);
+// nb: can i change the '/:id' here to '/:xid'?
+router.delete("/", async function (req, res) {
+  const response = await deleteFavouriteById(req.body);
   res.status(200).json({
-    success: true, 
-    payload: response
-  })
-})
+    success: true,
+    payload: response,
+  });
+});
 
 export { router };
