@@ -8,6 +8,8 @@
 // Call this function to create a table in elaphantSQL (try,catch & finally)
 //  Export the function
 //  import it in app.js
+// Added xid VARCHAR to create user favourites table
+// possible hiccup: make sure xid is passed down as xid and in the correct position to the function ' add to user favourites'
 
 import { pool } from "./index.js";
 import { user, userFavourites } from "./data.js";
@@ -39,6 +41,7 @@ export async function createUserTable() {
 
 export async function createUserFavouritesTable() {
   await pool.query(
+
     "CREATE TABLE user_favourites(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, uid VARCHAR REFERENCES users(uid), title VARCHAR, city VARCHAR, country VARCHAR, suburb VARCHAR, description VARCHAR, image VARCHAR)"
   );
 }
@@ -65,6 +68,7 @@ export async function insertDataUsers() {
 }
 
 // try {
+
 //   insertDataUsers();
 // } catch (error) {
 //   console.log(error);
@@ -72,11 +76,22 @@ export async function insertDataUsers() {
 //   await pool.end();
 // }
 
-// A comment
+// 	insertDataUsers();
+// } catch (error) {
+// 	console.log(error);
+// } finally {
+// 	await pool.end();
+// } 
+
+
+
 
 export async function insertDataUserFavourites() {
   return await pool.query(
+
     `INSERT INTO user_favourites(uid, title, city, country, suburb, description, image) (SELECT uid, title, city, country, suburb, description, image FROM json_populate_recordset(NULL::user_favourites, $1::JSON));`,
+
+  
     [JSON.stringify(userFavourites)]
   );
 }

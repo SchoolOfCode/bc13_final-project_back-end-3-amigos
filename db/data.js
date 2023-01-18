@@ -1,15 +1,30 @@
+
+
+// added xid manually to hard code initial seed data
+// NB: XIDs are VARCHAR!
+// Dummy IDS added: "A12345678, A12345679, A12345680"
+
+
 export const user = [
   {
     username: "example",
     email: "123@123.com",
     password: 123,
+
     uid: "abc",
+
+
   },
 ];
 
 export const userFavourites = [
   {
+
     uid: "abc",
+
+    user_id: 1,
+    xid: "A12345678",
+
     title: "Havana 1957",
     city: "Miami",
     country: "USA",
@@ -20,7 +35,12 @@ export const userFavourites = [
       "https://www.havana1957.com/wp-content/uploads/2018/10/Havana-1957-09.jpg",
   },
   {
+
     uid: "abc",
+
+    user_id: 1,
+    xid: "A12345679",
+
     title: "Bermuda Triangle of Romania",
     city: "Brasov",
     country: "Romania",
@@ -31,7 +51,12 @@ export const userFavourites = [
       "https://www.nzherald.co.nz/resizer/H1Y9hnQPb_7NushNsbqQ3mGNJCI=/576x432/smart/filters:quality(70)/cloudfront-ap-southeast-2.images.arcpublishing.com/nzme/E3UJK5HXCNETMEQ36WMTTR7QT4.jpg",
   },
   {
+
     uid: "abc",
+
+    user_id: 1,
+    xid: "A12345680",
+
     title: "Britannia Panopticon",
     city: "Glasgow",
     country: "UK",

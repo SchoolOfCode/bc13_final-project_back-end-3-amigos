@@ -9,7 +9,14 @@ DONE - Add post route
 DONE - Add post model
 DONE - Add delete route
 DONE - Add delete model
+-DONE
 
-
+Add to functions: insert into column 'xid'
+Change route to delete by XID
+Change function to get XID
+Add XID column to database creation setup function 
+Make sure xid is being returned from all functions etc
+change the tests
+Merge the changes to main branch so they show up on render backend
 
 

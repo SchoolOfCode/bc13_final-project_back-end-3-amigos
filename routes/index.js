@@ -23,7 +23,8 @@ router.get("/:id", async function (req, res) {
   });
 });
 
-// POST: new favourite location
+// POST: new favourite location AND
+//POST: new user
 router.post("/", async function (req, res) {
   if (req.body.username) {
     const response = await addNewUsers(req.body);
@@ -40,9 +41,10 @@ router.post("/", async function (req, res) {
   }
 });
 
-// DELETE: delete favourite location  by id
-router.delete("/:id", async function (req, res){
-  const response = await deleteFavouriteById(req.params.id);
+// DELETE: delete favourite location  by XID
+// nb: can i change the '/:id' here to '/:xid'? 
+router.delete("/:xid", async function (req, res){
+  const response = await deleteFavouriteById(req.params.xid);
   res.status(200).json({
     success: true, 
     payload: response
