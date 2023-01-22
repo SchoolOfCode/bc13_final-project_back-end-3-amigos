@@ -26,14 +26,18 @@ router.get("/:uid", async function (req, res) {
 // POST: new favourite location AND
 // POST: new user
 router.post("/", async function (req, res) {
-  if (req.body.username) {
+  console.log(req.body);
+  // changed username to uid to validate the user.
+  if (req.body.uid) {
     const response = await addNewUsers(req.body);
+    console.log(response);
     res.status(200).json({
       success: true,
       payload: response,
     });
   } else {
     const response = await addNewFavourite(req.body);
+    console.log(response);
     res.status(200).json({
       success: true,
       payload: response,
