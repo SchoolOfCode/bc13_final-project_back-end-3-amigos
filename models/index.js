@@ -13,6 +13,7 @@ export async function addNewUsers(users) {
   return res.rows;
 }
 
+// GET specific user info
 export async function getUser(uid) {
   const res = await pool.query(
     `SELECT username, email, password, uid from users where uid=$1;`,
@@ -22,12 +23,15 @@ export async function getUser(uid) {
   return res.rows;
 }
 
+// DELETE specific user by uid
 export async function deleteUser(uid) {
   const res = await pool.query(`DELETE FROM users where uid=$1;`, [uid]);
 
   return res.rows;
 }
 
+
+// GET all users
 export async function getUsers() {
   const res = await pool.query(
     `SELECT username, email, password, uid from users;`
@@ -35,6 +39,7 @@ export async function getUsers() {
   return res.rows;
 }
 
+// GET all user favourites
 export async function getFavouritesByUid(uid) {
   // use pool.query to open database connection
 
@@ -47,6 +52,7 @@ export async function getFavouritesByUid(uid) {
   return res.rows;
 }
 
+// Delete all user favourites by UID
 export async function deleteFavouritesByUid(uid) {
   // use pool.query to open database connection
 
@@ -59,7 +65,7 @@ export async function deleteFavouritesByUid(uid) {
   return res.rows;
 }
 
-// POST- add new user favourite to database
+// POST new user favourite
 export async function addFavourite(uid, favourite) {
   const res = await pool.query(
     `INSERT INTO user_favourites (uid, xid, title, city, country, suburb, description, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING*;`,
@@ -77,6 +83,7 @@ export async function addFavourite(uid, favourite) {
   return res.rows;
 }
 
+// GET specific user favourite
 export async function getFavouriteByUidXid(uid, xid) {
   const res = await pool.query(
     `SELECT  uid, xid, title, city, country, suburb, description, image FROM user_favourites WHERE uid = $1 AND xid = $2;`,
@@ -85,7 +92,7 @@ export async function getFavouriteByUidXid(uid, xid) {
   return res.rows;
 }
 
-//DELETE - location by xid AND uid, which comes through as an object from the front end
+//DELETE specific user favourite
 export async function deleteFavouriteByUidXid(uid, xid) {
   const res = await pool.query(
     `DELETE FROM user_favourites WHERE uid = $1 AND xid = $2 RETURNING*;`,
