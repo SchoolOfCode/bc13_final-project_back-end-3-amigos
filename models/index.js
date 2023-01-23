@@ -4,10 +4,6 @@
 import { response } from "express";
 import { pool } from "../db/index.js";
 
-/**
- *  an async await fn to get all the favourites by the uid
- */
-
 // POST add new user
 export async function addNewUsers(users) {
   const res = await pool.query(
