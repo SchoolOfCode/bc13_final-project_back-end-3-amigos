@@ -27,15 +27,16 @@ router.get("/", async function (req, res) {
   });
 });
 
-// POST: new favourite location AND
-// POST: new user
+// Post user info by UID
 router.post("/", async function (req, res) {
   console.log(req.body);
-  // changed username to uid to validate the user.
+
+  // check if user exists in database
   if (req.body.uid) {
     const currentUser = await getUser(req.body.uid);
     console.log(`current user: ${currentUser}`);
 
+    // If not, add new user
     if (currentUser.length === 0) {
       const response = await addNewUsers(req.body);
       console.log(response);
@@ -43,6 +44,8 @@ router.post("/", async function (req, res) {
         success: true,
         payload: response,
       });
+
+      // If so return existing user info
     } else {
       res.status(200).json({
         success: true,
@@ -52,6 +55,7 @@ router.post("/", async function (req, res) {
   }
 });
 
+// Get user info by UID
 router.get("/:uid", async function (req, res) {
   console.log(req.params);
   const response = await getUser(req.params.uid);
@@ -61,6 +65,7 @@ router.get("/:uid", async function (req, res) {
   });
 });
 
+// Delete user by UID
 router.delete("/:uid", async function (req, res) {
   const response = await deleteUser(req.params.uid);
   res.status(200).json({
@@ -68,7 +73,8 @@ router.delete("/:uid", async function (req, res) {
     payload: response,
   });
 });
-// GET: favourites by uid
+
+// Get user favourites by uid
 router.get("/:uid/favourites", async function (req, res) {
   const response = await getFavouritesByUid(req.params.uid);
   res.status(200).json({
@@ -77,8 +83,9 @@ router.get("/:uid/favourites", async function (req, res) {
   });
 });
 
+// Post favourites by UID and XID
 router.post("/:uid/favourites", async function (req, res) {
-  // changed username to uid to validate the user.
+
   console.log(req.params.uid);
   console.log(req.body);
   if (req.params.uid) {
@@ -90,8 +97,9 @@ router.post("/:uid/favourites", async function (req, res) {
   }
 });
 
+// Delete all user favourites by UID 
 router.delete("/:uid/favourites", async function (req, res) {
-  // changed username to uid to validate the user.
+
   if (req.params.uid) {
     const response = await deleteFavouritesByUid(req.params.uid);
     res.status(200).json({
@@ -101,6 +109,7 @@ router.delete("/:uid/favourites", async function (req, res) {
   }
 });
 
+// Get specific favourites by UID and XID
 router.get("/:uid/favourites/:xid", async function (req, res) {
   const response = await getFavouriteByUidXid(req.params.uid, req.params.xid);
   res.status(200).json({
@@ -109,7 +118,7 @@ router.get("/:uid/favourites/:xid", async function (req, res) {
   });
 });
 
-// DELETE: by uid and xid, passed through as an object in the body from the front end
+// Delete specific favourite by UID and XID
 router.delete("/:uid/favourites/:xid", async function (req, res) {
   const response = await deleteFavouriteByUidXid(
     req.params.uid,
