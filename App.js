@@ -4,21 +4,21 @@
 
 import express from "express";
 import { router } from "./routes/index.js";
-import cors from "cors"
+import cors from "cors";
 
 /**
  * initialize a new express server
  */
 const app = express();
 
-//Convert incoming files to JSON 
+//Convert incoming files to JSON
 app.use(express.json());
 
-// Cors middleware 
+// Cors middleware
 app.use(cors("*"));
 
 //App.use(json.parse());
-app.use("/userfavourites", router);
+app.use("/users", router);
 
 const PORT = process.env.PORT;
 
@@ -29,4 +29,4 @@ app.listen(PORT, function () {
   console.log(`Server is listening to port ${PORT}.`);
 });
 
-export default app
+export default app;
