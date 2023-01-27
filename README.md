@@ -1,22 +1,32 @@
-# final-project_back-end
-
-PLAN
-DONE -  added 'dev' script for development, and changed the 'start' script to run node instead of nodemon so that it won't constantly be tracking and rereshing with each change
-DONE - Add .env in git ignore
-DONE - CORS - add cors middleware
-Add database drop table function 
-DONE - Add post route
-DONE - Add post model
-DONE - Add delete route
-DONE - Add delete model
--DONE
-
-Add to functions: insert into column 'xid'
-Change route to delete by XID
-Change function to get XID
-Add XID column to database creation setup function 
-Make sure xid is being returned from all functions etc
-change the tests
-Merge the changes to main branch so they show up on render backend
+# Amigo Backend
+This is the Backend server to the Amigo Next.js application:-
+https://amigostravel.netlify.app/
 
 
+Technology/Libraries:
+- Jest
+- Supertest
+
+
+Dependencies:
+- Dotenv
+- Nodemon
+- Express
+- Cors
+- Morgan
+- Pg
+
+## API 
+
+
+| HTTP Method | Path            |  Request Body (JSON)    | Response Body (JSON)          | Status Code | Result                         |
+| ----------- | --------------- |  ---------------------- | ----------------------------- | ----------- | ------------------------------ |
+| GET         | /users/               |                         | Array of user objects | 200         | Get all registered users                |
+| GET         | /users/:uid           |                         | Array of one user object         | 200         | Returns specific user's data |
+| GET         | /users/:uid/favourites|                          | Array of user favourite objects  | 200         | Returns details of all locations favourited by specific user            |
+| GET         | /users/:uid/favourites/:xid| | Array of single location object        | 200         | Returns specific location favourites by specific user              |
+| DELETE      | /users/:uid/favourites/:xid|                        | Array of single location object| 200         | Deletes specific location of specific user                |
+| DELETE      | /users/:uid/favourites|                        | Array of user favourites objects | 200         |Deletes all favourites of specific user               |
+| DELETE      | /users/:uid            |                          | Array of single user object         | 200         | Deletes specific user |
+| POST        | /users/:uid/favourites|  New favourite object         | New favourite object  | 200        | Adds new user favourite         |
+| POST        | /users          | New user object | New user object       | 201         | Adds new user if they don't already exist               |
