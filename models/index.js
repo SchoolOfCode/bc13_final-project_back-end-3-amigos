@@ -30,7 +30,6 @@ export async function deleteUser(uid) {
   return res.rows;
 }
 
-
 // GET all users
 export async function getUsers() {
   const res = await pool.query(
@@ -104,41 +103,40 @@ export async function deleteFavouriteByUidXid(uid, xid) {
 // POST new journal entry
 
 export async function postJournalEntry(uid, data) {
-  const res = await pool.query(`INSERT INTO journal(uid, title, location, text, date  ) VALUES($1, $2, $3, $4, $5) RETURNING*; `, [
-    uid, data.title, data.location,data.text, data.date 
-  ] );
-  return res.rows
+  const res = await pool.query(
+    `INSERT INTO journal(uid, title, location, text, date  ) VALUES($1, $2, $3, $4, $5) RETURNING*; `,
+    [uid, data.title, data.location, data.text, data.date]
+  );
+  return res.rows;
 }
 
 // GET journal entries
 
-export async function getJournalEntriesByUid(uid){
-  const res = await pool.query(`SELECT* FROM journal WHERE uid = $1`, [
-    uid
-  ]) 
-  return res.rows
+export async function getJournalEntriesByUid(uid) {
+  const res = await pool.query(`SELECT* FROM journal WHERE uid = $1`, [uid]);
+  return res.rows;
 }
 
 // DELETE ALL journal entry
-export async function deleteAllJournalEntriesByUid(uid){
-  const res = await pool.query(`DELETE FROM journal WHERE uid = $1 `, [
-    uid
-  ])
-  return res.rows
-} 
-
-// DELETE ONE journal entry
-export async function deleteJournalEntryById(uid, id){
-  const res = await pool.query(`DELETE FROM journal WHERE uid = $1 AND id = $2 RETURNING *`, [
-    uid, id   
-  ])
-  return res.rows
+export async function deleteAllJournalEntriesByUid(uid) {
+  const res = await pool.query(`DELETE FROM journal WHERE uid = $1 `, [uid]);
+  return res.rows;
 }
 
-// PATCH journal entry
-export async function patchJournalEntryById(uid, id, data){
-const res = await pool.query(`UPDATE journal SET title = $1, location = $2, text = $3, date = $4 WHERE uid = $5 AND id = $6 RETURNING *`, [
-  data.title, data.location, data.text, data.date,  uid, id 
-])
-return res.rows
+// DELETE ONE journal entry
+export async function deleteJournalEntryById(uid, id) {
+  const res = await pool.query(
+    `DELETE FROM journal WHERE uid = $1 AND id = $2 RETURNING *`,
+    [uid, id]
+  );
+  return res.rows;
+}
+
+// PATCH journal entry by UID, ID and Body(data object)
+export async function patchJournalEntryById(uid, id, data) {
+  const res = await pool.query(
+    `UPDATE journal SET title = $1, location = $2, text = $3, date = $4 WHERE uid = $5 AND id = $6 RETURNING *`,
+    [data.title, data.location, data.text, data.date, uid, id]
+  );
+  return res.rows;
 }
