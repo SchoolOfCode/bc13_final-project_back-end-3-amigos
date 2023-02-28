@@ -123,7 +123,7 @@ export async function deleteAllJournalEntriesByUid(uid) {
   return res.rows;
 }
 
-// DELETE ONE journal entry
+// DELETE ONE journal entry by uid and id
 export async function deleteJournalEntryById(uid, id) {
   const res = await pool.query(
     `DELETE FROM journal WHERE uid = $1 AND id = $2 RETURNING *`,
