@@ -1,7 +1,7 @@
 /**
  * import node modules needed
  */
-
+import { createJournalTable } from "./db/functions.js";
 import express from "express";
 import { router } from "./routes/index.js";
 import cors from "cors";
