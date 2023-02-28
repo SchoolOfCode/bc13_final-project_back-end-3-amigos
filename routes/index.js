@@ -4,7 +4,7 @@
  * import router from express
  */
 
-import express from "express";
+import express, { response } from "express";
 import {
   getFavouritesByUid,
   deleteFavouritesByUid,
@@ -15,6 +15,11 @@ import {
   getUser,
   deleteUser,
   getUsers,
+  postJournalEntry,
+  getJournalEntriesByUid,
+  deleteAllJournalEntriesByUid,
+  deleteJournalEntryById,
+  patchJournalEntryById,
 } from "../models/index.js";
 
 const router = express.Router();
@@ -129,5 +134,62 @@ router.delete("/:uid/favourites/:xid", async function (req, res) {
     payload: response,
   });
 });
+
+// Post journal entry
+router.post("/journal/:uid", async function(req, res){
+  if(req.params.uid){
+    const response = await postJournalEntry(
+      req.params.uid,
+      req.body,
+    );
+    res.status(201).json({
+      success: true,
+      payload: response,
+    })
+  }
+})
+
+// GET journal entries by uid
+router.get("/journal/:uid", async function(req, res){
+  const response = await getJournalEntriesByUid(req.params.uid)
+
+res.status(200).json({
+  success: true,
+  payload: response,
+})
+});
+
+// DELETE ALL journal entries by UID
+router.delete("/journal/:uid", async function(req, res){
+  const response = await deleteAllJournalEntriesByUid(req.params.uid)
+
+  res.status(200).json({
+    success:true,
+    payload:response,
+  })
+
+})
+
+
+// DELETE ONE journal entry by ID
+router.delete("/journal/:uid/:id", async function(req, res){
+  const response = await deleteJournalEntryById(req.params.uid, req.params.id)
+
+  res.status(200).json({
+    success:true,
+    payload: response,
+  })
+})
+
+// PATCH/EDIT journal entry by ID 
+router.patch("/journal/:uid/:id", async function(req,res){
+  const response = await patchJournalEntryById(req.params.uid, req.params.id, req.body)
+
+  res.status(200).json({
+    success:true,
+    payload:response,
+  })
+
+})
 
 export { router };

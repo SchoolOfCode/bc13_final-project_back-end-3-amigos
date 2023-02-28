@@ -45,8 +45,14 @@ export async function createUserFavouritesTable() {
   );
 }
 
+export async function createJournalTable() {
+  await pool.query(
+    "CREATE TABLE journal(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, uid VARCHAR REFERENCES users(uid), title VARCHAR, location VARCHAR, text VARCHAR, date DATE )"
+  );
+}
+
 // try {
-//   createUserFavouritesTable();
+//   createJournalTable();
 // } catch (error) {
 //   console.log(error);
 // } finally {
